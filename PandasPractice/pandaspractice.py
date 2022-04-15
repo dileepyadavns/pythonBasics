@@ -1,76 +1,28 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[1]:
-
-
+#importing libraries
 import pandas as pd
 import numpy as np
 
+na_vals=['NA',"Missing"] #to check for null values
 
-# In[2]:
-
-
-na_vals=['NA',"Missing"]
-
-
-# In[3]:
-
-
-df=pd.read_csv("surveypublic2019.csv", index_col='Respondent',na_values=na_vals)
-
-
-# In[4]:
-
+df=pd.read_csv("surveypublic2019.csv", index_col='Respondent',na_values=na_vals) # read dataframe
 
 print(df)
 
-
-# In[5]:
-
-
 print(df.shape)
 
+pd.set_option('display.max_columns',48) #to make adjust how many columns and rows to be printed in dataframe
 
-# In[6]:
-
-
-pd.set_option('display.max_columns',48)
-
-
-# In[7]:
-
-
-sdf=pd.read_csv('survey_results_schema.csv')
-
-
-# In[8]:
-
+sdf=pd.read_csv('survey_results_schema.csv') #read dataframe
 
 print(sdf)
 
+print(df.head()) #top 5 rows in dataframe
 
-# In[9]:
-
-
-print(df.head())
-
-
-# In[10]:
-
-
-df.tail()
-
-
-# In[11]:
-
+print(df.tail()) #bottom 5 rows
 
 print(df.head(2))
 
-
-# In[12]:
-
-
+#dictionary for creating dataframe
 persons={
     'first':['dileep','arjun','vikas','krishna'],
     'last':['golla','boddu','vatte','golla'],
@@ -78,502 +30,160 @@ persons={
      'place':['suryapet','hyderabad','kodad','suryapet']
 }
 
+dfp=pd.DataFrame(persons) #created dataframe
 
-# In[13]:
+print(dfp)
+print(dfp['age']) #prints age column
+print(type(dfp['age'])) #gives type of column
+
+dfp.age  #if we dataframe as a method same as the our column then wit will show error sodf 
+          #its better not use dot notation to acess the column
+
+print(dfp[['first','age']])
+
+print(type(dfp[['first','age']]))
+print(df.columns) #all columns in dataframe will be printed
+
+print(dfp.columns)
+
+print(dfp.iloc[0])
+print(df.iloc[0])
+print(dfp.iloc[[0,1,2]])
 
 
-dfp=pd.DataFrame(persons)
+print(dfp.iloc[[0,1],[1,0]])
+
+print(dfp.loc[[0,1],['first','age']])
+
+print(dfp.iloc[0:2,0:2])
+
+print(dfp['age'].value_counts())
+
+print(df['Country'].value_counts())
+
+print(dfp.loc[0,'age'])
+
+print(dfp.loc[:,"first":'age'])
+
+print(dfp.iloc[:,0:2])
+
+print(dfp.loc[0:2,'first'])
+
+dfp.set_index('first') #to set index
+
+print(dfp)
+
+dfp.set_index('first',inplace=True)
+
+print(dfp)
+
+print(dfp.index)
+print(dfp.loc['dileep'])
+
+print(dfp.loc['dileep','age'])
+
+print(dfp.iloc[0])
+
+dfp.reset_index(inplace=True)
+
+print(dfp)
+
+print(df)
+
+dfp.set_index('first',inplace=True)
+
+print(dfp)
+
+print(dfp.sort_index())
+dfp.sort_index(inplace=True)
 
 
-# In[14]:
+print(dfp)
+
+dfp.reset_index(inplace=True)
+
+print(dfp)
+print(dfp.describe())
+filt = (dfp['last']=='golla')
+print(dfp[filt])
+print(dfp.loc[filt])
+
+filt2 = (dfp['last'] == 'golla') | ( dfp['first']  == 'dileep')
+print(dfp[filt2])
+filt2 = (dfp['last'] == 'golla') & ( dfp['first']  == 'dileep')
+
+print(dfp[filt2])
+filt2 = (dfp['last'] == 'golla') & ( dfp['first']  == 'dileep')
+
+dfp[~filt2]
+
+filt2 = (dfp['last'] == 'golla') | ( dfp['first']  == 'dileep')
+
+dfp[~filt2]
+
+df.head()
+
+
+filt3= (df['Age']=='18-24 years old')
+
+df.loc[filt3,'Country']
+
+
+filt3= (df['Age']=='18-24 years old') & (df['Gender']=="Man")
+
+df.loc[filt3, ['Age','Country','Gender','Trans'] ]
+
+countries=['Finland','India','Pakistan','Bangladesh']
+
+filt=df['Country'].isin(countries)
+
+df.loc[filt,'Country']
+filt=df['PlatformWorkedWith'].str.contains('Python', na=False)
+
+print(filt)
+
+
+df.loc[filt, 'PlatformWorkedWith']
+
+print(dfp)
+
+
+# # Updating Columns
+
+dfp.columns=['first name','last name','age','place']
 
 
 print(dfp)
 
 
-# In[15]:
-
-
-print(dfp['age'])
-
-
-# In[16]:
-
-
-print(type(dfp['age']))
-
-
-# In[17]:
-
-
-dfp.age  #if we dataframe as a method same as the our column then wit will show error sodf 
-          #its better not use dot notation to acess the column
-
-
-# In[18]:
-
-
-print(dfp[['first','age']])
-
-
-# In[19]:
-
-
-print(type(dfp[['first','age']]))
-
-
-# In[20]:
-
-
-print(df.columns)
-
-
-# In[21]:
-
-
-print(dfp.columns)
-
-
-# In[22]:
-
-
-print(dfp.iloc[0])
-
-
-# In[23]:
-
-
-print(df.iloc[0])
-
-
-# In[24]:
-
-
-print(dfp.iloc[[0,1,2]])
-
-
-# In[25]:
-
-
-print(dfp.iloc[[0,1],[1,0]])
-
-
-# In[26]:
-
-
-print(dfp.loc[[0,1],['first','age']])
-
-
-# In[27]:
-
-
-print(dfp.iloc[0:2,0:2])
-
-
-# In[28]:
-
-
-print(dfp['age'].value_counts())
-
-
-# In[29]:
-
-
-print(df['Country'].value_counts())
-
-
-# In[30]:
-
-
-print(dfp.loc[0,'age'])
-
-
-# In[31]:
-
-
-print(dfp.loc[:,"first":'age'])
-
-
-# In[32]:
-
-
-print(dfp.iloc[:,0:2])
-
-
-# In[33]:
-
-
-print(dfp.loc[0:2,'first'])
-
-
-# In[34]:
-
-
-dfp.set_index('first')
-
-
-# In[35]:
-
-
-dfp
-
-
-# In[36]:
-
-
-dfp.set_index('first',inplace=True)
-
-
-# In[37]:
-
-
-dfp
-
-
-# In[38]:
-
-
-dfp.index
-
-
-# In[39]:
-
-
-dfp.loc['dileep']
-
-
-# In[40]:
-
-
-dfp.loc['dileep','age']
-
-
-# In[41]:
-
-
-dfp.iloc[0]
-
-
-# In[42]:
-
-
-dfp.reset_index(inplace=True)
-
-
-# In[43]:
-
-
-dfp
-
-
-# In[44]:
-
-
-df
-
-
-# In[45]:
-
-
-dfp.set_index('first',inplace=True)
-
-
-# In[46]:
-
-
-dfp
-
-
-# In[47]:
-
-
-dfp.sort_index()
-
-
-# In[48]:
-
-
-dfp.sort_index(inplace=True)
-
-
-# In[49]:
-
-
-dfp
-
-
-# In[50]:
-
-
-dfp.reset_index(inplace=True)
-
-
-# In[51]:
-
-
-dfp
-
-
-# In[52]:
-
-
-dfp.describe()
-
-
-# In[53]:
-
-
-filt = (dfp['last']=='golla')
-
-
-# In[54]:
-
-
-dfp[filt]
-
-
-# In[55]:
-
-
-dfp.loc[filt]
-
-
-# In[56]:
-
-
-dfp.loc[filt]
-
-
-# In[57]:
-
-
-filt2 = (dfp['last'] == 'golla') | ( dfp['first']  == 'dileep')
-
-
-# In[58]:
-
-
-dfp[filt2]
-
-
-# In[59]:
-
-
-filt2 = (dfp['last'] == 'golla') & ( dfp['first']  == 'dileep')
-
-
-# In[60]:
-
-
-dfp[filt2]
-
-
-# In[61]:
-
-
-filt2 = (dfp['last'] == 'golla') & ( dfp['first']  == 'dileep')
-
-
-# In[62]:
-
-
-dfp[~filt2]
-
-
-# In[63]:
-
-
-filt2 = (dfp['last'] == 'golla') | ( dfp['first']  == 'dileep')
-
-
-# In[64]:
-
-
-dfp[~filt2]
-
-
-# In[65]:
-
-
-df.head()
-
-
-# In[66]:
-
-
-filt3= (df['Age']=='18-24 years old')
-
-
-# In[67]:
-
-
-df.loc[filt3,'Country']
-
-
-# In[ ]:
-
-
-
-
-
-# In[68]:
-
-
-filt3= (df['Age']=='18-24 years old') & (df['Gender']=="Man")
-
-
-# In[69]:
-
-
-df.loc[filt3, ['Age','Country','Gender','Trans'] ]
-
-
-# In[70]:
-
-
-countries=['Finland','India','Pakistan','Bangladesh']
-
-
-# In[71]:
-
-
-filt=df['Country'].isin(countries)
-
-
-# In[72]:
-
-
-df.loc[filt,'Country']
-
-
-# In[73]:
-
-
-filt=df['PlatformWorkedWith'].str.contains('Python', na=False)
-
-
-# In[74]:
-
-
-filt
-
-
-# In[ ]:
-
-
-
-
-
-# In[75]:
-
-
-df.loc[filt, 'PlatformWorkedWith']
-
-
-# In[76]:
-
-
-dfp
-
-
-# # Updating Columns
-
-# In[77]:
-
-
-dfp.columns=['first name','last name','age','place']
-
-
-# In[78]:
-
-
-dfp
-
-
-# In[79]:
-
-
 dfp.columns=[x.upper() for x in dfp.columns]
 
-
-# In[80]:
-
-
-dfp
-
-
-# In[81]:
-
-
+print(dfp)
 dfp.columns=dfp.columns.str.replace(' ','_')
 
-
-# In[82]:
-
-
-dfp
-
-
-# In[83]:
-
-
+print(dfp)
 dfp.columns=dfp.columns.str.lower()  #dfp.columns=[x.lower() for x in dfp.columns]
-
-
-# In[84]:
-
-
-dfp
-
-
-# In[85]:
-
-
+print(dfp)
 dfp.rename(columns={'first_name':'first','last_name':'last'}, inplace=True)
 
-
-# In[86]:
-
-
-dfp
+print(dfp)
 
 
-# # Updating rows:
-
-# In[87]:
+# Updating rows:
 
 
 dfp.loc[2]=['kitti','golla',22,'aregudem']
 
-
-# In[88]:
-
-
-dfp
-
-
-# In[89]:
-
+print(dfp)
 
 dfp.loc[2,['first','age']]=['pandu',10]
 
-
-# In[90]:
-
-
-dfp
-
-
-# In[91]:
-
+print(dfp)
 
 dfp.loc[0,'first']='varun'
 
 
-# In[92]:
-
-
-dfp
+print(dfp)
 
 
 # In[93]:
