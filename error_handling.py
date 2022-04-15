@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
 
 try :
     for i in ['1','2','3']:
