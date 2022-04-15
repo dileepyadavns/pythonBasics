@@ -1,6 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
 
 import numpy as np
 
@@ -68,493 +65,173 @@ print(a)
 
 a=a.reshape(3,3)
 
-
-# In[ ]:
-
-
 print(a)
-
-
-# In[ ]:
-
 
 np.size(a)
 
-
-# In[ ]:
-
-
 np.shape(a)
-
-
-# In[ ]:
-
-
-a.dtype
-
-
-# In[ ]:
-
-
+print(a.dtype)
 a=np.array([[2,4],[6,10]])
 
-
-# In[ ]:
-
-
-a[0][1]
-
-
-# In[ ]:
-
+print(a[0][1])
 
 s=np.arange(1,10,1)
 
-
-# In[ ]:
-
-
-s[2:5]
-
-
-# In[ ]:
-
+print(s[2:5])
 
 b=np.copy(s)
 
-
-# In[ ]:
-
-
 print(b)
-
-
-# In[ ]:
-
 
 c=np.array([[2,3,4],[5,7,8]])
 
-
-# In[ ]:
-
-
 print(c)
-
-
-# In[ ]:
-
 
 b=np.copy(c)
 
-
-# In[ ]:
-
-
-c,b
-
-
-# In[ ]:
-
+print(c,b)
 
 d=b.view()
 
-
-# In[ ]:
-
-
 print(d)
-
-
-# In[ ]:
-
 
 print("a=",c)
 print("b=",b)
 print("c=",d)
 
-
-# In[ ]:
-
-
 c[0][1]=200
-
-
-# In[ ]:
-
 
 print(c)
 
-
-# In[ ]:
-
-
 print(b)
-
-
-# In[ ]:
 
 
 b[0][2]=1000
 
 
-# In[ ]:
-
-
 print(d)
-
-
-# In[ ]:
 
 
 np.sort(b, axis=0)
 
-
-# In[ ]:
-
-
 np.sort(b, axis=1)
-
-
-# In[ ]:
 
 
 d=np.dtype([('name','S1'),('perc','int')])
 
-
-# In[ ]:
-
-
-
 marks=np.array([('hari',20),('raju',80),('ravi',50)],dtype=d)
 
-
-# In[ ]:
-
-
 print(marks)
-
-
-# In[ ]:
-
-
 np.sort(marks,order='name')
-
-
-# In[ ]:
-
-
 a=np.array([[2,5],[4,10]])
-
-
-# In[ ]:
-
 
 b=np.array([[1,3],[6,9]])
 
+print(np.append(a,b))
 
-# In[ ]:
+print(np.insert(a,3,20)) #array,index,elements
+print(np.delete(a,3))
+print(np.concatenate((a,b),axis=1))
 
+print(a,b)
 
-np.append(a,b)
+print(np.concatenate((a,b),axis=0))
 
+print(np.stack((a,b)))
 
-# In[ ]:
+print(np.stack((a,b),axis=1))
 
+print(np.vstack((a,b)))
 
-np.insert(a,3,20)  #array,index,elements
+print(np.hstack((a,b)))
 
+print(a)
 
-# In[ ]:
+print(b)
 
-
-np.delete(a,3)
-
-
-# In[ ]:
-
-
-np.concatenate((a,b),axis=1)
-
-
-# In[ ]:
-
-
-a,b
-
-
-# In[ ]:
-
-
-np.concatenate((a,b),axis=0)
-
-
-# In[ ]:
-
-
-np.stack((a,b))
-
-
-# In[ ]:
-
-
-np.stack((a,b),axis=1)
-
-
-# In[ ]:
-
-
-np.vstack((a,b))
-
-
-# In[ ]:
-
-
-np.hstack((a,b))
-
-
-# In[ ]:
-
-
-a
-
-
-# In[ ]:
-
-
-b
-
-
-# In[ ]:
-
-
-np.dstack((a,b))
-
-
-# In[ ]:
+print(np.dstack((a,b)))
 
 
 x=np.arange(10,100,10)
 
-
-# In[ ]:
-
-
 print(x)
 
-
-# In[ ]:
-
-
 s1,s2,s3=np.split(x,3)
-
-
-# In[ ]:
-
 
 print(s1)
 
 
-# In[ ]:
-
-
 d=np.arange(10,130,10)
 
-
-# In[ ]:
-
-
-np.split(d,(2,6))
-
-
-# In[ ]:
-
+print(np.split(d,(2,6)))
 
 m=np.arange(10,130,10).reshape(4,3)
 
 
-# In[ ]:
-
-
-np.where(m==80)
-
-
-# In[ ]:
+print(np.where(m==80))
 
 
 c=np.arange(10,100,10)
-
-
-# In[ ]:
-
-
+print(c)
 r=np.where(c==20)
-
-
-# In[ ]:
-
 
 print(r)
 
-
-# In[ ]:
-
-
-np.where(c%20==0)
-
-
-# In[ ]:
-
+print(np.where(c%20==0))
 
 q=np.array([10,20,40,30,5])
 
-
-# In[ ]:
-
-
 print(q)
 
+print(np.searchsorted(q,10))
 
-# In[ ]:
-
-
-np.searchsorted(q,10)
-
-
-# In[ ]:
-
-
-np.searchsorted(q,[20,40,30])
-
-
-# In[ ]:
-
+print(np.searchsorted(q,[20,40,30]))
 
 a=np.array([[2,3,4],[10,11,12]])
 b=np.array([[5,6,7],[13,14,15]])
 
+print(np.add(a,b))
 
-# In[ ]:
 
+print(np.subtract(a,b))
 
-np.add(a,b)
+print(np.multiply(a,b))
 
+print(np.divide(a,b))
 
-# In[ ]:
 
+print(np.exp(a))
 
-np.subtract(a,b)
+print(np.sqrt(a))
 
+print(c=a=np.array([[2,3,4],[10,11,12]]))
 
-# In[ ]:
+print(np.array_equal(a,c))
 
+print(a==b)
 
-np.multiply(a,b)
+print(np.min(a))
 
+print(np.min(a,axis=1))
 
-# In[ ]:
+print(np.max(a,axis=0))
+print(np.sum(a))
 
+print(a)
 
-np.divide(a,b)
+print(np.sum(a,axis=0))
 
+print(np.sum(a,axis=1))
 
-# In[ ]:
 
+# medain
+print(np.median(a,axis=0))
 
-np.exp(a)
+print(np.var(a))
 
+# mean
+print(np.mean(a))
 
-# In[ ]:
+print(np.var(a,axis=0))
 
-
-np.sqrt(a)
-
-
-# In[ ]:
-
-
-c=a=np.array([[2,3,4],[10,11,12]])
-
-
-# In[ ]:
-
-
-np.array_equal(a,c)
-
-
-# In[ ]:
-
-
-a==b
-
-
-# In[ ]:
-
-
-np.min(a)
-
-
-# In[ ]:
-
-
-np.min(a,axis=1)
-
-
-# In[ ]:
-
-
-np.max(a,axis=0)
-
-
-# In[ ]:
-
-
-np.sum(a)
-
-
-# In[ ]:
-
-
-a
-
-
-# In[ ]:
-
-
-np.sum(a,axis=0)
-
-
-# In[ ]:
-
-
-np.sum(a,axis=1)
-
-
-# In[ ]:
-
-
-np.median(a,axis=0)
-
-
-# In[ ]:
-
-
-np.var(a)
-
-
-# In[ ]:
-
-
-np.mean(a)
-
-
-# In[ ]:
-
-
-np.var(a,axis=0)
-
-
-# In[3]:
-
-
-np.linspace(0,2,9)
-
+print(np.linspace(0,2,9))
