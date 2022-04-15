@@ -1,14 +1,8 @@
-#!/usr/bin/env python
-# coding: utf-8
 
-# In[4]:
-
-
+#import libraries
 import pandas as pd
 import numpy as np
 from datetime import datetime
-
-# In[5]:
 
 
 d_parser = lambda x: datetime.strptime(x, '%Y-%m-%d')
